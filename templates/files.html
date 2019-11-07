@@ -1,0 +1,25 @@
+{% extends "bootstrap/base.html" %}
+{% block html_attribs %} lang="pt"{% endblock %}
+{% block title %}Envio de arquivos{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+  	<div class="row">
+  		<div class="col-12-xs">
+  			<h3>Informações do Bucket:</h3>
+  			<p>Data de Criação: {{ my_bucket.creation_date }}</p>
+  			<hr>
+  			{% for file in files %}
+  				{{ file.key }}<br>
+  				{{ file.last_modified }}
+  			{% endfor %}
+  		</div>
+  	</div>
+  </div>
+{% endblock %}
