@@ -1,5 +1,10 @@
 {% extends "bootstrap/base.html" %}
 {% block html_attribs %} lang="en"{% endblock %}
+{% block head %}
+  {{super()}}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+{% endblock %}
 {% block title %}Envio de arquivos{% endblock %}
 
 {% block navbar %}
@@ -18,15 +23,16 @@
           {% if messages %}
             <p class="bg-info" style="padding: 15px;">
               {% for msg in messages %}
-                {{ msg}}<br>
+                {{ msg }}<br>
               {% endfor %}
             </p>
           {% endif %}
         {% endwith %}
         <hr>
-        <form class="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+        <form class="upload-form" action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
           <p><input type="file" name="file"></p>
           <button type="submit" name="submit" class="btn btn-primary">Upload de arquivo</button>
+        </form>
   			<table class="table table-striped">
   			  	<tr>
   			  		<th>Nome do arquivo:</th>
@@ -38,6 +44,14 @@
   			  		<td>{{ file.key }}</td>
   			  		<td>{{ file.last_modified | datetimeformat}}</td>
   			  	  <td>{{ file.key | file_type }}</td>
+              <td>
+                <form class="delete-form" action="{{ url_for('delete') }}" method="post">
+                  <input type="hidden" name="key" value="{{ file.key }}">
+                  <button type="submit" class="btn btn-danger btn-sm">
+                    <i class="fa fa-trash-alt"></i>
+                  </button>
+
+              </td>
             </tr>
             {% endfor %}
   			  </table>
