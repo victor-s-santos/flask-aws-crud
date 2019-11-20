@@ -14,6 +14,15 @@
   		<div class="col-12-xs">
   			<h3>Informações do Bucket:</h3>
         <h4>Criado em: {{ my_bucket.creation_date | datetimeformat }}</h4>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <p class="bg-info" style="padding: 15px;">
+              {% for msg in messages %}
+                {{ msg}}<br>
+              {% endfor %}
+            </p>
+          {% endif %}
+        {% endwith %}
         <hr>
         <form class="upload-form" action="/upload" method="post" enctype="multipart/form-data">
           <p><input type="file" name="file"></p>
