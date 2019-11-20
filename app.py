@@ -4,6 +4,7 @@ import boto3
 from config import S3_BUCKET, S3_KEY, S3_SECRET
 from filters import datetimeformat, file_type
 
+
 s3_resource = boto3.resource(
    "s3",
    aws_access_key_id=S3_KEY,
