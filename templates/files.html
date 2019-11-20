@@ -13,13 +13,23 @@
   	<div class="row">
   		<div class="col-12-xs">
   			<h3>Informações do Bucket:</h3>
-  			<p>Data de Criação: {{ my_bucket.creation_date }}</p>
-  			<hr>
-  			{% for file in files %}
-  				{{ file.key }}<br>
-  				{{ file.last_modified }}
-  			{% endfor %}
+        <h4>Criado em: {{ my_bucket.creation_date | datetimeformat }}</h4>
+  			<table class="table table-striped">
+  			  	<tr>
+  			  		<th>Nome do arquivo:</th>
+  			  		<th>Última modificação:</th>
+              <th>Tipo de Arquivo:</th>
+  			  	</tr>
+  			  	{% for file in files %}
+  			  	<tr>
+  			  		<td>{{ file.key }}</td>
+  			  		<td>{{ file.last_modified | datetimeformat}}</td>
+  			  	  <td>{{ file.key | file_type }}</td>
+            </tr>
+            {% endfor %}
+  			  </table>
   		</div>
   	</div>
   </div>
+
 {% endblock %}
