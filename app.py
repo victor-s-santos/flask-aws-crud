@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 import boto3
 from config import S3_BUCKET, S3_KEY, S3_SECRET
@@ -34,7 +34,8 @@ def upload():
 	my_bucket = s3_resource.Bucket(S3_BUCKET)
 	my_bucket.Object(file.filename).put(Body=file)
 
-	return "Upload realizado com sucesso."
+	return redirect(url_for('files'))
+	#return "Upload realizado com sucesso."
 
 if __name__ == '__main__':
 	app.run()
