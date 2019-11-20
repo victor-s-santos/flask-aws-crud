@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, Response
 from flask_bootstrap import Bootstrap
 import boto3
 from config import S3_BUCKET, S3_KEY, S3_SECRET
@@ -49,5 +49,21 @@ def delete():
 
     flash('Arquivo deletado com sucesso!')
     return redirect(url_for('files'))
+
+@app.route('/download', methods=['POST'])
+def download():
+	key = request.form['key']
+
+	s3_resource = boto3.resource('s3')
+	my_bucket = s3_resource.Bucket(S3_BUCKET)
+	file_obj = my_bucket.Object(key).get()
+
+	return Response(
+		file_obj['Body'].read(),
+		mimetype='text/plain',
+		headers={"Content-Disposition": "attachment;filename={}".format(key)}
+		)
+
+
 if __name__ == '__main__':
 	app.run()

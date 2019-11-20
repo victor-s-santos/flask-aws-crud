@@ -4,6 +4,7 @@
   {{super()}}
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/styles.css">
 {% endblock %}
 {% block title %}Envio de arquivos{% endblock %}
 
@@ -44,12 +45,20 @@
   			  		<td>{{ file.key }}</td>
   			  		<td>{{ file.last_modified | datetimeformat}}</td>
   			  	  <td>{{ file.key | file_type }}</td>
-              <td>
+              <td class="td-buttons">
                 <form class="delete-form" action="{{ url_for('delete') }}" method="post">
                   <input type="hidden" name="key" value="{{ file.key }}">
                   <button type="submit" class="btn btn-danger btn-sm">
                     <i class="fa fa-trash-alt"></i>
                   </button>
+                </form>
+
+                <form class="download-form" action="{{ url_for('download') }}" method="post">
+                  <input type="hidden" name="key" value="{{ file.key }}">
+                  <button type="submit" class="btn btn-default btn-sm">
+                    <i class="fa fa-download"></i>
+                  </button>
+                </form>
 
               </td>
             </tr>
