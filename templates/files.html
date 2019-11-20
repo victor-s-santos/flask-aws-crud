@@ -14,6 +14,10 @@
   		<div class="col-12-xs">
   			<h3>Informações do Bucket:</h3>
         <h4>Criado em: {{ my_bucket.creation_date | datetimeformat }}</h4>
+        <hr>
+        <form class="upload-form" action="/upload" method="post">
+          <p><input type="file" name="file"></p>
+          <button type="submit" name="submit" class="btn btn-primary">Upload de arquivo</button>
   			<table class="table table-striped">
   			  	<tr>
   			  		<th>Nome do arquivo:</th>
