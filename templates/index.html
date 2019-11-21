@@ -8,5 +8,24 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Sendo exibido a partir de um template html.</h1>
+  <h1>Lista dos Buckets:</h1>
+  <div class="container">
+    <div class="col-12-xs">
+      <h3>Bucket List</h3>
+
+      <table class="table table-striped">
+        <tr>
+          <th>Nome do Bucket</th>
+          <th>Data de Criação</th>
+        </tr>
+
+      {% for bucket in buckets %}
+        <tr>
+          <td>{{ bucket['Name'] }}</td>
+          <td>{{ bucket['CreationDate'] }}</td>
+        </tr>
+      {% endfor %}
+      </table>
+    </div>
+  </div>
 {% endblock %}
