@@ -9,10 +9,13 @@
 {% block title %}Flask AWS S3 Browser{% endblock %}
 
 {% block navbar %}
-<div class="navbar navbar-fixed-top">
-  <ul class="nav navbar-nav">
-  	<li><a href="{{ url_for('index') }}">Home</a></li>
-  	<li><a href="{{ url_for('files') }}">Buckets</a></li>
+<div class="container">
+	<div class="navbar">
+	  <ul class="nav navbar-nav">
+	  	<li><a href="{{ url_for('index') }}">Home</a></li>
+	  	<li><a href="{{ url_for('files') }}">Buckets</a></li>
+	  </ul>
+	</div>
 </div>
 {% endblock %}
 
