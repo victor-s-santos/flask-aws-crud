@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 import boto3
 from config import S3_BUCKET, S3_KEY, S3_SECRET
 from filters import datetimeformat, file_type
-
+from pprint import pprint
 
 s3_resource = boto3.resource(
    "s3",
@@ -16,8 +16,18 @@ app.secret_key = 'secret'
 app.jinja_env.filters['datetimeformat'] = datetimeformat
 app.jinja_env.filters['file_type'] = file_type
 
+def get_bucket():
+    s3_resource = _get_s3_resource()
+    return s3_resource.Bucket(S3_BUCKET)
+
+def get_buckets_list():
+    client = boto3.client('s3')
+    buckets = client.list_buckets()
+    pprint(buckets)
+
 @app.route('/')
 def index():
+	buckets = get_buckets_list()
 	return render_template('index.html')
 
 
@@ -38,7 +48,7 @@ def upload():
 	flash('Upload realizado com sucesso.')
 
 	return redirect(url_for('files'))
-	#return "Upload realizado com sucesso."
+	#return "Upload realizado com sucesso.""
 	
 @app.route('/delete', methods=['POST'])
 def delete():
