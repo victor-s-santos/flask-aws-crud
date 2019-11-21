@@ -22,7 +22,7 @@
       {% for bucket in buckets %}
         <tr>
           <td>{{ bucket['Name'] }}</td>
-          <td>{{ bucket['CreationDate'] }}</td>
+          <td>{{ bucket['CreationDate'] | datetimeformat }}</td>
         </tr>
       {% endfor %}
       </table>
