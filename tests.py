@@ -18,8 +18,7 @@ class TestHome(unittest.TestCase):
 
 	def test_content_text(self):
 		"""Must contain 'Lista dos Buckets' as text content"""
-		#self.assertIn('Lista dos Buckets', self.response.data)
-		self.assertIn('Lista dos Buckets', self.response.data.decode('utf-8'))		
+		self.assertIn('Lista dos Buckets', self.response.data.decode('utf-8'))
 
 if __name__ == '__main__':
 	unittest.main()
