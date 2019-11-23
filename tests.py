@@ -10,15 +10,16 @@ class TestHome(unittest.TestCase):
 
 	def test_get(self):
 		"""Must return status code 200"""
-		#app_test = app.test_client()
-		#response = app_test.get('/')
 		self.assertEqual(200, self.response.status_code)
 
 	def test_content_type(self):
 		"""Must return file type html""" 
-		#app_test = app.test_client()
-		#response = app_test.get('/')
 		self.assertIn('text/html', self.response.content_type)
+
+	def test_content_text(self):
+		"""Must contain 'Lista dos Buckets' as text content"""
+		#self.assertIn('Lista dos Buckets', self.response.data)
+		self.assertIn('Lista dos Buckets', self.response.data.decode('utf-8'))		
 
 if __name__ == '__main__':
 	unittest.main()
